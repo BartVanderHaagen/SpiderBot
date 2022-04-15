@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>spider_msgs</name>
+  <version>1.0.1</version>
+  <description>
+    Message and service types: custom messages and services for Spider packages
+  </description>
+  <license>Apache 2.0</license>
+  <author email="bart@robotis.com">Bart van der Haagen</author>
+  <maintainer email="bart@robotis.com">Bart</maintainer>
+  <url type="website">http://wiki.ros.org/spider_msgs</url>
+  <url type="emanual">http://spider.obotis.com</url>
+  <url type="repository">https://github.com/spider/spider_msgs</url>
+  <url type="bugtracker">https://github.com/spider/spider_msgs/issues</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>std_msgs</depend>
+  <build_depend>message_generation</build_depend>
+  <build_export_depend>message_runtime</build_export_depend>
+  <exec_depend>message_runtime</exec_depend>
+</package>
