@@ -1,0 +1,12 @@
+<launch>
+  <arg name="model" default="$(env SPIDER_MODEL)" doc="model type [spider]"/>
+  <arg name="multi_robot_name" default=""/>
+
+  <include file="$(find spider_bringup)/launch/spider_remote.launch">
+    <arg name="model" value="$(arg model)" />
+    <arg name="multi_robot_name" value="$(arg multi_robot_name)"/>
+  </include>
+
+ 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find spider_description)/rviz/spider.rviz"/>
+</launch>

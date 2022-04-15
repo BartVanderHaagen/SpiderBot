@@ -1,0 +1,22 @@
+<launch>
+  <arg name="multi_robot_name" default=""/>
+  <arg name="set_lidar_frame_id" default="laser"/>
+
+  <include file="$(find spider_bringup)/launch/spider_model.launch">
+    <arg name="multi_robot_name" value="$(arg multi_robot_name)"/>
+  </include>
+
+  <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="multi_joint_state_publisher">
+    <param name="rate" value="10"/>
+  </node>
+  <test pkg="rostest" type="hztest" name="hztest" test-name="hztest_multi_joints_urdf">
+    <param name="topic" value="joint_states"/>
+    <param name="hz" value="10"/>
+    <param name="hzerror" value="0.1"/>
+    <param name="test_duration" value="10"/>
+    <param name="wait_time" value="10"/>
+  </test> 
+
+  
+
+</launch>
