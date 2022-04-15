@@ -1,0 +1,678 @@
+<?xml version="1.0" ?>
+<robot name="spider" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find spider_description)/urdf/common_properties.xacro"/>
+  <xacro:include filename="$(find spider_description)/urdf/spider.gazebo.xacro"/>
+
+ 
+
+
+
+  <link name="base_footprint">
+   
+  </link>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.09" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.0 0.0 -0.09" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/bases/base_box.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+
+  <link name="right_front_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_front_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_front_servo"/>
+    <origin rpy="0 3.1415 3.8" xyz="0.13 -0.09 0.02"/>
+  </joint>
+  
+  <link name="right_front_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="right_front_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-1.5" upper="0.6" velocity="0.5"/>
+    <parent link="right_front_servo"/>
+    <child link="right_front_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="right_front_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_front_uparm" type="revolute">
+  <limit effort="1000.0" lower="-1.1" upper="0.9" velocity="0.5"/>
+    <parent link="right_front_shoulder"/>
+    <child link="right_front_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="right_front_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_front_uparm_link" type="fixed">
+    <parent link="right_front_uparm"/>
+    <child link="right_front_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="right_front_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_front_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-0.22" upper="2.4" velocity="0.5"/>
+    <parent link="right_front_uparm"/>
+    <child link="right_front_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="right_front_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_front_low_link" type="fixed">
+    <parent link="right_front_lowarm"/>
+    <child link="right_front_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+  
+ 
+    <link name="right_mid_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin  xyz="0 0.0 0.0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_mid_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_mid_servo"/>
+    <origin rpy="0 3.1415 3.1415" xyz="0.0 -0.125 0.02"/>
+  </joint>
+
+  <link name="right_mid_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="right_mid_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-0.6" upper="0.6" velocity="0.5"/>
+    <parent link="right_mid_servo"/>
+    <child link="right_mid_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="right_mid_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_mid_uparm" type="revolute">
+   <limit effort="1000.0" lower="-1.1" upper="0.9" velocity="0.5"/>
+    <parent link="right_mid_shoulder"/>
+    <child link="right_mid_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="right_mid_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_mid_uparm_link" type="fixed">
+    <parent link="right_mid_uparm"/>
+    <child link="right_mid_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="right_mid_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_mid_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-0.2" upper="2.4" velocity="0.5"/>
+    <parent link="right_mid_uparm"/>
+    <child link="right_mid_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="right_mid_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_mid_low_link" type="fixed">
+    <parent link="right_mid_lowarm"/>
+    <child link="right_mid_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+  
+
+
+
+  <link name="right_back_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_back_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_back_servo"/>
+    <origin rpy="0 3.1415 -3.8" xyz="-0.13 -0.09 0.02"/>
+  </joint>
+  
+    <link name="right_back_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="right_back_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-1.5" upper="0.6" velocity="0.5"/>
+    <parent link="right_back_servo"/>
+    <child link="right_back_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="right_back_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_back_uparm" type="revolute">
+  <limit effort="1000.0" lower="-1.1" upper="0.9" velocity="0.5"/>
+    <parent link="right_back_shoulder"/>
+    <child link="right_back_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="right_back_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_back_uparm_link" type="fixed">
+    <parent link="right_back_uparm"/>
+    <child link="right_back_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="right_back_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_back_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-0.2" upper="2.4" velocity="0.5"/>
+    <parent link="right_back_uparm"/>
+    <child link="right_back_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="right_back_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 3.1415 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_right_back_low_link" type="fixed">
+    <parent link="right_back_lowarm"/>
+    <child link="right_back_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+  
+
+
+
+  <link name="left_front_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_front_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_front_servo"/>
+    <origin  rpy="0 0 -0.785" xyz="0.13 0.09 0.02"/>
+  </joint>
+
+  <link name="left_front_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="left_front_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-0.9" upper="0.75" velocity="0.5"/>
+    <parent link="left_front_servo"/>
+    <child link="left_front_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="left_front_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_front_uparm" type="revolute">
+  <limit effort="1000.0" lower="-0.9" upper="1.1" velocity="0.5"/>
+    <parent link="left_front_shoulder"/>
+    <child link="left_front_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="left_front_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_front_uparm_link" type="fixed">
+    <parent link="left_front_uparm"/>
+    <child link="left_front_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="left_front_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_front_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-2.4" upper="0.2" velocity="0.5"/>
+    <parent link="left_front_uparm"/>
+    <child link="left_front_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="left_front_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_front_low_link" type="fixed">
+    <parent link="left_front_lowarm"/>
+    <child link="left_front_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+
+
+    <link name="left_mid_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0.0 0.0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_mid_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_mid_servo"/>
+    <origin xyz="-0.0 0.125 0.02"/>
+  </joint>
+
+    <link name="left_mid_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="left_mid_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-0.6" upper="0.6" velocity="0.5"/>
+    <parent link="left_mid_servo"/>
+    <child link="left_mid_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="left_mid_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_mid_uparm" type="revolute">
+  <limit effort="1000.0" lower="-0.9" upper="1.1" velocity="0.5"/>
+    <parent link="left_mid_shoulder"/>
+    <child link="left_mid_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="left_mid_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_mid_uparm_link" type="fixed">
+    <parent link="left_mid_uparm"/>
+    <child link="left_mid_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="left_mid_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_mid_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-2.4" upper="0.2" velocity="0.5"/>
+    <parent link="left_mid_uparm"/>
+    <child link="left_mid_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="left_mid_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_mid_low_link" type="fixed">
+    <parent link="left_mid_lowarm"/>
+    <child link="left_mid_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+   
+  
+  <link name="left_back_servo">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/motors/servo.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_back_servo" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_back_servo"/>
+    <origin rpy="0 0 0.785" xyz="-0.13 0.09 0.02"/>
+  </joint>
+
+   <link name="left_back_shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/s_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+  
+  <joint name="left_back_shoulder_joint" type="revolute">
+  <limit effort="1000.0" lower="-0.78" upper="0.9" velocity="0.5"/>
+    <parent link="left_back_servo"/>
+    <child link="left_back_shoulder"/>
+    <origin rpy="0 -1.57075 0" xyz="0.00 0.043 0.0"/>
+  </joint>
+  
+  
+  <link name="left_back_uparm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/ulink.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_back_uparm" type="revolute">
+  <limit effort="1000.0" lower="0.9" upper="-1.1" velocity="0.5"/>
+    <parent link="left_back_shoulder"/>
+    <child link="left_back_uparm"/>
+    <origin rpy="0 1.5775 0" xyz="0.0 0.068 0.0"/>
+  </joint>
+  
+
+  <link name="left_back_uparm_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/upleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 1.5775 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_back_uparm_link" type="fixed">
+    <parent link="left_back_uparm"/>
+    <child link="left_back_uparm_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+
+   <link name="left_back_lowarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_back_lowarm" type="revolute">
+  <limit effort="1000.0" lower="-2.4" upper="0.2" velocity="0.5"/>
+    <parent link="left_back_uparm"/>
+    <child link="left_back_lowarm"/>
+    <origin rpy="0 0 0" xyz="0.0 0.09 0.0"/>
+  </joint>
+  
+   <link name="left_back_low_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://spider_description/meshes/legs/lowleg_link.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+  <joint name="base_to_left_back_low_link" type="fixed">
+    <parent link="left_back_lowarm"/>
+    <child link="left_back_low_link"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+  
+
+
+
+
+  <joint name="caster_back_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_back_link"/>
+    <origin xyz="-0.081 0 -0.004" rpy="0 0 0"/> 
+  </joint>
+
+  <link name="caster_back_link">
+    <collision>
+      <origin xyz="0 0.001 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.030 0.009 0.020"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.005" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001" />
+    </inertial>
+  </link>
+
+
+
+ 
+
+</robot>
